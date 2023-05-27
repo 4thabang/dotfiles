@@ -4,30 +4,6 @@ require('dap-go').setup()
 require('mason').setup()
 require('nvim-dap-virtual-text').setup({})
 
-require("dap-vscode-js").setup({
-   debugger_path = vim.fn.stdpath('data') .. '/mason/packages/js-debug-adapter',
-   debugger_cmd = { "js-debug-adapter" },
-   adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
-})
-
-for _, language in ipairs({ "typescript", "javascript" }) do
-  dap.configurations[language] = {
-    {
-      type = "pwa-node",
-      request = "launch",
-      name = "Launch file",
-      program = "${file}",
-      cwd = "${workspaceFolder}",
-    },
-    {
-      type = "pwa-node",
-      request = "attach",
-      name = "Attach",
-      processId = require'dap.utils'.pick_process,
-      cwd = "${workspaceFolder}",
-    }
-  }
-end
 
 vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
 vim.opt.shortmess = "c"
@@ -140,7 +116,6 @@ cmp.setup({
     })
   },
 
-
   -- Installed sources
   sources = {
     { name = 'nvim_lsp' },
@@ -150,6 +125,30 @@ cmp.setup({
   },
 })
 
+require("dap-vscode-js").setup({
+   debugger_path = vim.fn.stdpath('data') .. '/mason/packages/js-debug-adapter',
+   debugger_cmd = { "js-debug-adapter" },
+   adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
+})
+
+for _, language in ipairs({ "typescript", "javascript" }) do
+  dap.configurations[language] = {
+    {
+      type = "pwa-node",
+      request = "launch",
+      name = "Launch file",
+      program = "${file}",
+      cwd = "${workspaceFolder}",
+    },
+    {
+      type = "pwa-node",
+      request = "attach",
+      name = "Attach",
+      processId = require'dap.utils'.pick_process,
+      cwd = "${workspaceFolder}",
+    }
+  }
+end
 
 --[[
    [local status, null_ls = pcall(require, "null-ls")
