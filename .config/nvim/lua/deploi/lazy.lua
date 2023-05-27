@@ -97,7 +97,7 @@ local plugins = {
   "rcarriga/nvim-dap-ui",
   "theHamsta/nvim-dap-virtual-text",
   "nvim-telescope/telescope-dap.nvim",
-  "mxsdev/nvim-dap-vscode-js",
+  { "mxsdev/nvim-dap-vscode-js", dependencies = {"mfussenegger/nvim-dap"} },
 
 -- JavaScript, TypeScript, React
   "jose-elias-alvarez/null-ls.nvim",
