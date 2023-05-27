@@ -1,6 +1,6 @@
 ## My .dotfiles
 
-These `.dotfiles` use a git bare repo for ease of use, maintability and reference.
+These `.dotfiles` use a git bare repo to keep track of them in a maintainable manner.
 
 Link: [Git Dotfiles Bare Repo](https://www.atlassian.com/git/tutorials/dotfiles)
 
@@ -44,4 +44,5 @@ dotfiles checkout
 
 dotfiles config --local status.showUntrackedFiles no
 ```
-DISCLAIMER: Note that if you already have some of the files you'll get an error message. You can either (1) delete them or (2) back them up somewhere else.
+---
+**DISCLAIMER**: Note that if you already have some of the files you'll get an error message. You can either (1) delete them or (2) back them up somewhere else.
