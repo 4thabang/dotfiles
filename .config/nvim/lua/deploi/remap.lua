@@ -12,7 +12,7 @@ vim.keymap.set("n", "<Leader>-", "<cmd>vertical resize -5")
 
 vim.keymap.set("n", "<Leader>k", vim.cmd.Autoformat)
 vim.keymap.set("n", "<Leader>d", vim.cmd.bd)
-vim.keymap.set("n", "<Leader>bd", "<cmd>bp\\|bd #")
+vim.keymap.set("n", "<Leader>bd", "<cmd>bp | sp | bn | bd<CR>")
 vim.keymap.set("n", "<Leader>o", "o<Esc>")
 vim.keymap.set("n", "<Leader>p", "O<Esc>")
 
