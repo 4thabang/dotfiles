@@ -1,8 +1,10 @@
 ## My .dotfiles
 
-These `.dotfiles` use a git bare repo to keep track of them in a maintainable manner.
+This repo houses my `.dotfiles`. They use a git bare repository to ensure long term maintainability as they grow in complexity and variety. 
 
-Link: [Git Dotfiles Bare Repo](https://www.atlassian.com/git/tutorials/dotfiles)
+Feel free to clone, fork or use this repo as inspiration.
+
+**Link**: [git bare repository](https://www.atlassian.com/git/tutorials/dotfiles)
 
 ```bash
 # Initial Setup
