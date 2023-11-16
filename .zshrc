@@ -179,3 +179,5 @@ if [ -f '/Users/thabang/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Use
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/thabang/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/thabang/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+export MODULAR_HOME="/Users/thabang/.modular"
+export PATH="/Users/thabang/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
