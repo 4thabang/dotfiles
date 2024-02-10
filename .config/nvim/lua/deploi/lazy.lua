@@ -43,7 +43,6 @@ local plugins = {
     vim.cmd.colorscheme("catppuccin-mocha")
   end
 },
-
 -- Navigation
 "nvim-lua/popup.nvim",
 "nvim-lua/plenary.nvim",
