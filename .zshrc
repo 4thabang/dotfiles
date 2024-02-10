@@ -181,3 +181,7 @@ if [ -f '/Users/thabang/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Use
 if [ -f '/Users/thabang/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/thabang/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 export MODULAR_HOME="/Users/thabang/.modular"
 export PATH="/Users/thabang/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
