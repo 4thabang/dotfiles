@@ -17,10 +17,11 @@ vim.keymap.set("n", "<Leader>sto", "<cmd>lua require('dap').step_out()<CR>")
 vim.keymap.set("n", "<Leader>b", "<cmd>lua require('dap').toggle_breakpoint()<CR>")
 vim.keymap.set("n", "<Leader>tui", "<cmd>lua require('dapui').toggle()<CR>")
 
--- vim.o.updatetime = 250
--- vim.cmd [[
---  autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})
--- ]]
+-- Hover diagnostics - Disable if not needed
+vim.o.updatetime = 250 -- Time to hover before displaying
+vim.cmd [[
+autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})
+]]
 
 local format_sync_grp = vim.api.nvim_create_augroup("Format", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -79,7 +80,7 @@ cmp.setup({
   -- Enable LSP snippets
   snippet = {
     expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body)
+      vim.fn["vsnip#anonymous"](args.body)
     end,
   },
 
@@ -88,15 +89,15 @@ cmp.setup({
       mode = 'symbol',
       before = function(entry, vim_item)
 
-      -- vim_item.kind = lspkind.presets.default[vim_item.kind]
+        -- vim_item.kind = lspkind.presets.default[vim_item.kind]
 
-      vim_item.menu = ({
-            nvim_lsp = "[LSP]",
-            look = "[Dict]",
-            buffer = "[Buffer]",
-          })[entry.source.name]
-      return vim_item
-    end
+        vim_item.menu = ({
+          nvim_lsp = "[LSP]",
+          look = "[Dict]",
+          buffer = "[Buffer]",
+        })[entry.source.name]
+        return vim_item
+      end
     })
   },
 
@@ -126,9 +127,9 @@ cmp.setup({
 })
 
 require("dap-vscode-js").setup({
-   debugger_path = vim.fn.stdpath('data') .. '/mason/packages/js-debug-adapter',
-   debugger_cmd = { "js-debug-adapter" },
-   adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
+  debugger_path = vim.fn.stdpath('data') .. '/mason/packages/js-debug-adapter',
+  debugger_cmd = { "js-debug-adapter" },
+  adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
 })
 
 for _, language in ipairs({ "typescript", "javascript" }) do
@@ -151,32 +152,32 @@ for _, language in ipairs({ "typescript", "javascript" }) do
 end
 
 --[[
-   [local status, null_ls = pcall(require, "null-ls")
-   [if (not status) then return end
-   [
-   [null_ls.setup({
-   [  sources = {
-   [    null_ls.builtins.diagnostics.eslint_d.with({
-   [      diagnostics_format = '[eslint] #{m}\n(#{c})'
-   [    }),
-   [  }
-   [})
-   [
-   [local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-   [require("null-ls").setup({
-   [    on_attach = function(client, bufnr)
-   [        if client.supports_method("textDocument/formatting") then
-   [            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-   [            vim.api.nvim_create_autocmd("BufWritePre", {
-   [                group = augroup,
-   [                buffer = bufnr,
-   [                callback = function()
-   [                    -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-   [                    vim.lsp.buf.formatting_sync()
-   [                end,
-   [            })
-   [        end
-   [    end,
-   [})
-   ]]
+[local status, null_ls = pcall(require, "null-ls")
+[if (not status) then return end
+[
+[null_ls.setup({
+  [  sources = {
+    [    null_ls.builtins.diagnostics.eslint_d.with({
+      [      diagnostics_format = '[eslint] #{m}\n(#{c})'
+      [    }),
+      [  }
+      [})
+      [
+      [local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+      [require("null-ls").setup({
+        [    on_attach = function(client, bufnr)
+          [        if client.supports_method("textDocument/formatting") then
+          [            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+          [            vim.api.nvim_create_autocmd("BufWritePre", {
+            [                group = augroup,
+            [                buffer = bufnr,
+            [                callback = function()
+              [                    -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+              [                    vim.lsp.buf.formatting_sync()
+              [                end,
+              [            })
+              [        end
+              [    end,
+              [})
+              ]]
 
