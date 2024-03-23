@@ -173,15 +173,15 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 
 
-[ -f "/Users/thabang/.ghcup/env" ] && source "/Users/thabang/.ghcup/env" # ghcup-env
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/thabang/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/thabang/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/thabang/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/thabang/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-export MODULAR_HOME="/Users/thabang/.modular"
+[ -f "/Users/thabang/.ghcup/env" ] && source "/Users/thabang/.ghcup/env" # ghcup-envexport MODULAR_HOME="/Users/thabang/.modular"
 export PATH="/Users/thabang/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/thabang/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/thabang/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/thabang/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/thabang/google-cloud-sdk/completion.zsh.inc'; fi
