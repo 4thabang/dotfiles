@@ -202,14 +202,14 @@ if (not status) then return end
 
 null_ls.setup({
   sources = {
-    null_ls.builtins.diagnostics.eslint_d.with({
+    null_ls.builtins.diagnostics.eslint.with({
       diagnostics_format = '[eslint] #{m}\n(#{c})'
     }),
     null_ls.builtins.diagnostics.fish
   }
 })
 
-local status, prettier = pcall(require, "prettier")
+local status, prettier = pcall(require, "prettierd")
 if (not status) then return end
 
 prettier.setup {
@@ -247,7 +247,6 @@ EOF
 
 lua <<EOF
 local cmp = require'cmp'
-
 local lspkind = require("lspkind")
 
 cmp.setup({
@@ -264,9 +263,7 @@ cmp.setup({
     mode = 'symbol',
 
     before = function(entry, vim_item)
-
       -- vim_item.kind = lspkind.presets.default[vim_item.kind]
-
       vim_item.menu = ({
             nvim_lsp = "[LSP]",
             look = "[Dict]",

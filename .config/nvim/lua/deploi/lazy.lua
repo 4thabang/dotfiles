@@ -83,6 +83,7 @@ local plugins = {
 },
 
 -- Debugging
+{ "nvim-neotest/nvim-nio" },
 "mfussenegger/nvim-dap",
 "leoluz/nvim-dap-go",
 "rcarriga/nvim-dap-ui",
@@ -91,6 +92,7 @@ local plugins = {
 { "mxsdev/nvim-dap-vscode-js", dependencies = {"mfussenegger/nvim-dap"} },
 
 -- JavaScript, TypeScript, React
+-- "nvimtools/none-ls.nvim",
 "jose-elias-alvarez/null-ls.nvim",
 "MunifTanjim/prettier.nvim",
 

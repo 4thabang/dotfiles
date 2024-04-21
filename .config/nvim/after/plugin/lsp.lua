@@ -1,9 +1,40 @@
 local dap = require('dap')
-require('dapui').setup()
-require('dap-go').setup()
-require('mason').setup()
-require('nvim-dap-virtual-text').setup({})
+local dapui = require('dapui')
+local dap_go = require('dap-go')
+local mason = require('mason')
+local dap_virtual_text = require('nvim-dap-virtual-text')
+local lsp = require('lsp-zero').preset({})
+local lspconfig = require('lspconfig')
+local cmp = require('cmp')
+local dapjs = require('dap-vscode-js')
+local lspkind = require("lspkind")
 
+dapui.setup()
+dap_go.setup()
+dap_virtual_text.setup({})
+mason.setup()
+
+lspconfig.eslint.setup {
+  experimental = {
+    useFlatConfig = true
+  },
+  on_attach = function(client, bufnr)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll"
+    })
+  end,
+  settings = {
+    workingDirectory = { mode = 'location' },
+    eslint = {
+      rootPath = vim.fn.getcwd(),
+      workingDirectories = {
+        vim.fn.getcwd(),
+        vim.fn.getcwd() .. "/apps/nuxt"
+      }
+    }
+  },
+}
 
 vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
 vim.opt.shortmess = "c"
@@ -32,8 +63,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   group = format_sync_grp,
 })
 
-local lsp = require('lsp-zero').preset({})
-
 lsp.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr}
   vim.keymap.set("n", "<Leader>hd", function() vim.lsp.buf.definition() end, opts)
@@ -44,7 +73,7 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 -- (Optional) Configure lua language server for neovim
-require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
 lsp.setup()
 lsp.ensure_installed({
@@ -55,7 +84,7 @@ lsp.ensure_installed({
   "pyright",
 })
 
-local status, prettier = pcall(require, "prettier")
+local status, prettier = pcall(require, "prettierd")
 if (not status) then return end
 
 prettier.setup {
@@ -72,9 +101,6 @@ prettier.setup {
   }
 }
 
-local cmp = require("cmp")
-
-local lspkind = require("lspkind")
 
 cmp.setup({
   -- Enable LSP snippets
@@ -126,7 +152,11 @@ cmp.setup({
   },
 })
 
-require("dap-vscode-js").setup({
+dapjs.setup({
+  node_path = '/Users/thabang/.nvm/versions/node/v18.14.2/bin/node',
+  log_file_path = '/dev/null',
+  log_file_level = 0,
+  log_console_level = 0,
   debugger_path = vim.fn.stdpath('data') .. '/mason/packages/js-debug-adapter',
   debugger_cmd = { "js-debug-adapter" },
   adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
@@ -150,34 +180,3 @@ for _, language in ipairs({ "typescript", "javascript" }) do
     }
   }
 end
-
---[[
-[local status, null_ls = pcall(require, "null-ls")
-[if (not status) then return end
-[
-[null_ls.setup({
-  [  sources = {
-    [    null_ls.builtins.diagnostics.eslint_d.with({
-      [      diagnostics_format = '[eslint] #{m}\n(#{c})'
-      [    }),
-      [  }
-      [})
-      [
-      [local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-      [require("null-ls").setup({
-        [    on_attach = function(client, bufnr)
-          [        if client.supports_method("textDocument/formatting") then
-          [            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-          [            vim.api.nvim_create_autocmd("BufWritePre", {
-            [                group = augroup,
-            [                buffer = bufnr,
-            [                callback = function()
-              [                    -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-              [                    vim.lsp.buf.formatting_sync()
-              [                end,
-              [            })
-              [        end
-              [    end,
-              [})
-              ]]
-
