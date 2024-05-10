@@ -1,0 +1,10 @@
+[font]
+normal = { family = "JetBrainsMono NF" }
+bold = { family = "JetBrains Mono Medium"  }
+size = 15
+
+[window]
+padding = { x = 0, y = 0 }
+dynamic_padding = true
+blur = true
+decorations = "buttonless"
